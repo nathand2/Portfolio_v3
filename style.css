@@ -2,6 +2,7 @@
   --bg-main: rgb(0, 0, 0);
   --white: #ffffff;
   --basic-opacity-transition: all .5s ease-out;
+  --basic-opacity-transition-fast: all .5s ease-out;
   --menu-btn-transition: all .5s cubic-bezier(0.075, 0.82, 0.165, 1);
   --transform-transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
@@ -28,12 +29,13 @@
 html {
   color-scheme: dark light;
   background-color: var(--bg-main);
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Poiret One', cursive;
   min-height: 100vh;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   /* min-height: 100dvh; */
 }
 
@@ -71,6 +73,7 @@ header {
   left: 0;
   top: 0;
   z-index: 5;
+  overflow-y: hidden;
 }
 
 .intro-box {
@@ -81,12 +84,12 @@ header {
   height: 100%;
   width: 100%;
   opacity: 1;
-  z-index: 15;
+  z-index: 5;
   cursor: pointer;
-  -webkit-transition: var(--basic-opacity-transition);
-  -moz-transition: var(--basic-opacity-transition);
-  -o-transition: var(--basic-opacity-transition);
-  transition: var(--basic-opacity-transition);
+  -webkit-transition: var(--basic-opacity-transition-fast);
+  -moz-transition: var(--basic-opacity-transition-fast);
+  -o-transition: var(--basic-opacity-transition-fast);
+  transition: var(--basic-opacity-transition-fast);
 }
 .intro-box > h6 {
   letter-spacing: .4rem;
@@ -104,6 +107,7 @@ header {
   height: 100%;
   width: 100%;
   opacity: 1;
+  z-index: 10;
   -webkit-transition: var(--basic-opacity-transition);
   -moz-transition: var(--basic-opacity-transition);
   -o-transition: var(--basic-opacity-transition);
@@ -190,10 +194,16 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   overflow-wrap: break-word;
   padding-left: 50px;
   padding-right: 50px;
+}
+.education-box > .grid-item-xs9 > div {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  align-items: flex-start;
 }
 .education-box > .grid-item-xs3 {
   grid-column: 3;
@@ -206,9 +216,7 @@ header {
   padding-left: 50px;
   padding-right: 50px;
 }
-
-.education-box > div > div {
-  width: 100%;
+.education-box > div > .classes {
   display: flex;
   flex-direction: column;
 }
@@ -223,43 +231,112 @@ header {
   -o-transition: var(--transform-transition);
   transition: var(--transform-transition);
 }
+.course-btn {
+  width: auto;
+}
+.classes[data-classes-expand="false"] .classes-show-text-hide {
+  display: none;
+}
+.classes[data-classes-expand="true"] .classes-show-text-show {
+  display: none;
+}
+.classes[data-classes-expand="false"] .course-list {
+  max-height: 0px;
+}
+.classes[data-classes-expand="true"] .course-list {
+  max-height: 500px;
+}
 .box:not([data-focus="education"]) .education-box {
   /* display: none; */
   opacity: 0;
   visibility: hidden;
 }
-
-.box[data-focus="projects"] .projects-box {
-  display: flex;
+.projects-box {
+  --column-grid-gap: 2.125rem;
+  display: grid;
+  /* grid-template-areas: "col-2 col-0 col-1 col-3"; */
+  grid-template-areas: "col-2 col-0 col-1";
+  gap: var(--column-grid-gap);
+  grid-template-rows: 100%;
+  grid-template-columns: repeat(3,calc(33% - (var(--column-grid-gap)/ 3 * 3)));
   position: absolute;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
-  opacity: 1;
   -webkit-transition: var(--basic-opacity-transition);
   -moz-transition: var(--basic-opacity-transition);
   -o-transition: var(--basic-opacity-transition);
   transition: var(--basic-opacity-transition);
+  
+  z-index: 14;
+  overflow: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.projects-box > div {
+  min-height: 100%;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+}
+.projects-box > div:nth-child(1) {
+  grid-area: "col-0";
+}
+.projects-box > div:nth-child(2) {
+  grid-area: "col-1";
+}
+.projects-box > div:nth-child(3) {
+  grid-area: "col-2";
+}
+.project-container {
+  margin-bottom: 20px;
+}
+.project-container > img {
+  width: auto;
+  height: auto;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.box[data-focus="projects"] .projects-box {
+  opacity: 1;
 }
 .box:not([data-focus="projects"]) .projects-box {
   /* display: none; */
   opacity: 0;
   visibility: hidden;
 }
-
-.box[data-focus="about"] .about-box {
+.about-box {
   display: flex;
   position: absolute;
-  justify-content: center;
-  align-items: center;
   height: 100%;
-  width: 100%;
-  opacity: 1;
+  /* height: auto; */
+  width: auto;
+
+  overflow: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  
+  z-index: 14;
+  padding-left: 100px;
+  padding-right: 100px;
   -webkit-transition: var(--basic-opacity-transition);
   -moz-transition: var(--basic-opacity-transition);
   -o-transition: var(--basic-opacity-transition);
   transition: var(--basic-opacity-transition);
+  /* margin-bottom: 300px;
+  padding-bottom: 300px; */
+}
+.about-box > div > hr {
+  height: 50px;
+  visibility: hidden;
+}
+.about-box::-webkit-scrollbar {
+  /* display: none; */
+}
+
+.box[data-focus="about"] .about-box {
+  opacity: 1;
 }
 .box:not([data-focus="about"]) .about-box {
   /* display: none; */
@@ -285,34 +362,39 @@ header {
   opacity: 0;
   visibility: hidden;
 }
+/* 
+.menu-btn-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+} */
 
 .menu-btn {
-  position: absolute;
-  bottom: 50px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  /* align-items: center;
-  flex-direction: column; */
-}
-.menu-btn > button {
   width: 80px;
   height: 80px;
+  z-index: 20;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: 50px;
   border-radius: 50%;
   transform: translateY(200px);
   border-style: none;
   overflow-y: hidden;
-  /* opacity: 0; */
+  opacity: 0;
+  visibility: hidden;
   -webkit-transition: var(--transform-transition);
   -moz-transition: var(--transform-transition);
   -o-transition: var(--transform-transition);
   transition: var(--transform-transition);
 }
 
-.box:not([data-focus="landing"]) .menu-btn > button:hover {
+.box:not([data-focus="landing"]) .menu-btn:hover {
+  opacity: 1;
   scale: 1.3;
 }
-.menu-btn > button > p {
+.menu-btn > p {
   /* color: orange; */
   transform: translateY(-80px);
   -webkit-transition: var(--transform-transition);
@@ -320,11 +402,13 @@ header {
   -o-transition: var(--transform-transition);
   transition: var(--transform-transition);
 }
-.box:not([data-focus="landing"]) .menu-btn > button:hover > p {
+.box:not([data-focus="landing"]) .menu-btn > p {
   transform: translateY(0px);
+  visibility: visible;
   opacity: 1;
 }
-.box:not([data-focus="landing"]):not([data-focus=""]):not([data-focus="intro"]) .menu-btn > button {
-  /* opacity: 1; */
+.box:not([data-focus="landing"]):not([data-focus=""]):not([data-focus="intro"]) .menu-btn {
+  opacity: 1;
+  visibility: visible;
   transform: translateY(0px);
 }
