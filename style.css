@@ -3,6 +3,7 @@
   --white: #ffffff;
   --basic-opacity-transition: all .5s ease-out;
   --basic-opacity-transition-fast: all .5s ease-out;
+  --basic-opacity-transition-long: all 1s ease-out;
   --menu-btn-transition: all .5s cubic-bezier(0.075, 0.82, 0.165, 1);
   --transform-transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
@@ -86,10 +87,10 @@ header {
   opacity: 1;
   z-index: 5;
   cursor: pointer;
-  -webkit-transition: var(--basic-opacity-transition-fast);
-  -moz-transition: var(--basic-opacity-transition-fast);
-  -o-transition: var(--basic-opacity-transition-fast);
-  transition: var(--basic-opacity-transition-fast);
+  -webkit-transition: var(--basic-opacity-transition-long);
+  -moz-transition: var(--basic-opacity-transition-long);
+  -o-transition: var(--basic-opacity-transition-long);
+  transition: var(--basic-opacity-transition-long);
 }
 .intro-box > h6 {
   letter-spacing: .4rem;
@@ -176,6 +177,28 @@ header {
   margin-right: 10px;
 }
 
+@media only screen and (max-width: 1000px) {
+  .landing-content {
+    flex-direction: column;
+    width: min(500px, 80vw);
+  }
+  .landing-text-box {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .landing-text-box {
+    writing-mode: horizontal-tb;
+    text-orientation: sideways;
+  }
+  .landing-card {
+    width: 100%;
+    height: 120px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
 .box[data-focus="education"] .education-box {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -252,41 +275,52 @@ header {
   visibility: hidden;
 }
 .projects-box {
-  --column-grid-gap: 2.125rem;
-  display: grid;
-  /* grid-template-areas: "col-2 col-0 col-1 col-3"; */
-  grid-template-areas: "col-2 col-0 col-1";
-  gap: var(--column-grid-gap);
-  grid-template-rows: 100%;
-  grid-template-columns: repeat(3,calc(33% - (var(--column-grid-gap)/ 3 * 3)));
-  position: absolute;
-  justify-content: center;
-  align-items: center;
   height: 100%;
   width: 100%;
+  position: absolute;
   -webkit-transition: var(--basic-opacity-transition);
   -moz-transition: var(--basic-opacity-transition);
   -o-transition: var(--basic-opacity-transition);
   transition: var(--basic-opacity-transition);
+}
+.projects-box > div {
+  --column-grid-gap: 2.125rem;
+  display: grid;
+  /* grid-template-areas: "col-2 col-0 col-1 col-3"; */
+  /* grid-template-areas: "col-2 col-0 col-1"; */
+  gap: var(--column-grid-gap);
+  grid-template-rows: 100%;
+  grid-template-columns: repeat(3,calc(33% - (var(--column-grid-gap)/ 3 * 3)));
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
   
   z-index: 14;
   overflow: scroll;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
-.projects-box > div {
+.projects-box > div > hr {
+  height: 200px;
+  visibility: hidden;
+}
+
+.projects-box > div > div {
   min-height: 100%;
-  width: auto;
+  /* width: auto; */
+  max-width: 600px;
   display: flex;
   flex-direction: column;
+  /* font-family: 'Roboto', sans-serif; */
 }
-.projects-box > div:nth-child(1) {
+.projects-box > div > div:nth-child(1) {
   grid-area: "col-0";
 }
-.projects-box > div:nth-child(2) {
+.projects-box > div  > div:nth-child(2) {
   grid-area: "col-1";
 }
-.projects-box > div:nth-child(3) {
+.projects-box > div  > div:nth-child(3) {
   grid-area: "col-2";
 }
 .project-container {
@@ -294,9 +328,13 @@ header {
 }
 .project-container > img {
   width: auto;
-  height: auto;
+  /* height: auto; */
+  max-height: 600px;
   margin-top: 10px;
   margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: contain;
 }
 .box[data-focus="projects"] .projects-box {
   opacity: 1;
@@ -318,8 +356,6 @@ header {
   scrollbar-width: none;  /* Firefox */
   
   z-index: 14;
-  padding-left: 100px;
-  padding-right: 100px;
   -webkit-transition: var(--basic-opacity-transition);
   -moz-transition: var(--basic-opacity-transition);
   -o-transition: var(--basic-opacity-transition);
@@ -327,12 +363,112 @@ header {
   /* margin-bottom: 300px;
   padding-bottom: 300px; */
 }
+.about-box > .links {
+  position: absolute;
+  /* left: auto;
+  right: auto;
+  margin-left: auto;
+  margin-right: auto; */
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+.about-box > .links > a {
+  /* margin-left: 50px; */
+  margin-right: 20px;
+  margin-left: 20px;
+  color: white;
+  /* text-decoration: underline; */
+  /* cursor: pointer; */
+  /* z-index: 20; */
+}
+.about-box > .about-content {
+  width: auto;
+  height: auto;
+  padding-top: 20px;
+  padding-left: 10%;
+  padding-right: 10%;
+}
 .about-box > div > hr {
   height: 50px;
   visibility: hidden;
 }
 .about-box::-webkit-scrollbar {
   /* display: none; */
+}
+.about-box > div > div > h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.about-languages-box {
+  display: flex;
+}
+.about-languages-box > div {
+  width: 100%;
+}
+.about-languages-box > hr {
+  width: 5px;
+  /* height: 100%; */
+  border-style: none;
+  border-radius: 2px;
+  color: white;
+  background-color: white;
+}
+.about-languages-box > div:nth-child(1) {
+  text-align: end;
+  padding-right: 20px;
+}
+.about-languages-box > div:nth-child(3) {
+  text-align: start;
+  padding-left: 20px;
+}
+.about-languages-box > div > h2 {
+  text-decoration: underline;
+}
+.about-languages-box > div > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.about-technologies-box {
+  display: flex;
+}
+.about-technologies-box > div {
+  width: 100%;
+}
+.about-technologies-box > hr {
+  width: 5px;
+  /* height: 100%; */
+  border-style: none;
+  border-radius: 2px;
+  color: white;
+  background-color: white;
+}
+.about-technologies-box > div:nth-child(1) {
+  text-align: end;
+  padding-right: 20px;
+}
+.about-technologies-box > div:nth-child(3) {
+  text-align: start;
+  padding-left: 20px;
+}
+.about-technologies-box > div > h2 {
+  text-decoration: underline;
+}
+.about-technologies-box > div > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.about-concepts-box {
+  text-align: center;
 }
 
 .box[data-focus="about"] .about-box {

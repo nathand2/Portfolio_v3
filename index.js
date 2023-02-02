@@ -31,7 +31,8 @@ const educationToggleCourses = () => {
 const onLoad = () => {
   console.log("Loaded")
   const box = document.getElementsByClassName("box")[0];
-  setTimeout(() => navigate("intro"), 100);
+  navigate("intro")
+  // setTimeout(() => navigate("intro"), 100);
   setTimeout(() => {
     if (box.getAttribute("data-focus") === "intro")
       navigate("landing")
