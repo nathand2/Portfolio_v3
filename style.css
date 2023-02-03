@@ -336,6 +336,14 @@ header {
   margin-right: auto;
   object-fit: contain;
 }
+.project-container > .project-links {
+  display: flex;
+  margin-top: 10px;
+}
+.project-container > .project-links > a {
+  margin-right: 10px;
+  color: lightskyblue;
+}
 .box[data-focus="projects"] .projects-box {
   opacity: 1;
 }
