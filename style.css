@@ -404,9 +404,6 @@ header {
   height: 50px;
   visibility: hidden;
 }
-.about-box::-webkit-scrollbar {
-  /* display: none; */
-}
 .about-box > div > div > h1 {
   text-align: center;
   margin-bottom: 20px;
