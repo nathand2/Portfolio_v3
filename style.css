@@ -325,6 +325,7 @@ header {
 }
 .project-container {
   margin-bottom: 20px;
+  margin-top: 10px;
 }
 .project-container > img {
   width: auto;
@@ -485,7 +486,7 @@ header {
   visibility: hidden;
 }
 
-.box[data-focus="mystery"] .mystery-box {
+.box[data-focus="experience"] .experience-box {
   display: flex;
   position: absolute;
   justify-content: center;
@@ -498,10 +499,25 @@ header {
   -o-transition: var(--basic-opacity-transition);
   transition: var(--basic-opacity-transition);
 }
-.box:not([data-focus="mystery"]) .mystery-box {
+.box:not([data-focus="experience"]) .experience-box {
   /* display: none; */
   opacity: 0;
   visibility: hidden;
+}
+.experience-box > ul > li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.experience-box > ul > li > div {
+  width: 80%;
+}
+.experience-box > ul > li > div > hr {
+  /* width: min(200px, 20%); */
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: min(16em, 20%);
 }
 /* 
 .menu-btn-container {
